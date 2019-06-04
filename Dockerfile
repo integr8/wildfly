@@ -1,5 +1,7 @@
-FROM openjdk:8-jre-alpine
-LABEL Maintainer="Integr8 <fabioluciano@php.net>" \
+ARG JRE_VERSION
+
+FROM openjdk:${JRE_VERSION}
+LABEL Maintainer="Integr8 <contato@integr8.me>" \
   Description="Wildfly Docker Image"
 
 ARG WILDFLY_VERSION
@@ -9,13 +11,11 @@ ENV JBOSS_HOME /opt/wildfly
 
 WORKDIR /opt
 
-RUN apk --update add bash && \
-  wget ${WILDFLY_DOWNLOAD_URL} -O wildfly.tar.gz && directory=$(tar tfz wildfly.tar.gz --exclude '*/*') \
-  && tar -xzf wildfly.tar.gz && rm wildfly.tar.gz && ln -s wildfly-${WILDFLY_VERSION} wildfly
-
 ADD files/* /usr/local/bin/
 
-RUN chmod +x /usr/local/bin/*.sh
+RUN apk --update add bash && wget ${WILDFLY_DOWNLOAD_URL} -O wildfly.tar.gz \
+  && tar -xzf wildfly.tar.gz && rm wildfly.tar.gz && ln -s wildfly-${WILDFLY_VERSION} wildfly \
+  && chmod +x /usr/local/bin/*.sh
 
 EXPOSE 8080/tcp 8443/tcp
 
