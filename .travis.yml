@@ -1,0 +1,20 @@
+sudo: required
+
+services:
+  - docker
+
+jobs:
+  include:
+    - stage: "Wildfly 9.0.2 - Final - JRE8"
+      script: 
+        - docker build -t integr8/wildfly:9.0.2 --build-arg JRE_VERSION=8-jre-alpine --build-arg WILDFLY_VERSION=9.0.2.Final .
+        - docker push integr8/wildfly:9.0.2
+    - stage: "Wildfly 15.0.1 - Final - JRE12"
+      script: 
+        - docker build -t integr8/wildfly:15.0.1 --build-arg JRE_VERSION=12-jre-alpine --build-arg WILDFLY_VERSION=15.0.1.Final .
+        - docker push integr8/wildfly:15.0.1
+
+    - stage: "Wildfly 16.0.1 - Final - JRE12"
+      script: 
+        - docker build -t integr8/wildfly:16.0.0 --build-arg JRE_VERSION=12-jre-alpine --build-arg WILDFLY_VERSION=16.0.0.Final .
+        - docker push integr8/wildfly:16.0.0
