@@ -17,8 +17,20 @@ jobs:
         - docker build -t integr8/wildfly:15.0.1 --build-arg JRE_VERSION=12-jdk-alpine --build-arg WILDFLY_VERSION=15.0.1.Final .
         - docker push integr8/wildfly:15.0.1
 
-    - stage: "Wildfly 16.0.1 - Final - JRE12"
+    - stage: "Wildfly 16.0.0 - Final - JRE12"
       script:
         - docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}
         - docker build -t integr8/wildfly:16.0.0 --build-arg JRE_VERSION=12-jdk-alpine --build-arg WILDFLY_VERSION=16.0.0.Final .
         - docker push integr8/wildfly:16.0.0
+        
+     - stage: "Wildfly 17.0.1 - Final - JRE12"
+       script:
+        - docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}
+        - docker build -t integr8/wildfly:17.0.1 --build-arg JRE_VERSION=12-jdk-alpine --build-arg WILDFLY_VERSION=17.0.1.Final .
+        - docker push integr8/wildfly:17.0.1
+        
+     - stage: "Wildfly 18.0.1 - Final - JRE12"
+       script:
+        - docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}
+        - docker build -t integr8/wildfly:18.0.1 --build-arg JRE_VERSION=12-jdk-alpine --build-arg WILDFLY_VERSION=18.0.1.Final .
+        - docker push integr8/wildfly:18.0.1
